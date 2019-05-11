@@ -21,4 +21,26 @@ var autoprefixer = require('autoprefixer');
 
 // Configuration file to keep your code DRY
 var cfg = require('./gulpconfig.json');
+var paths = cfg.paths
 
+// Run:
+// gulp sass
+// Compiles SCSS files in CSS
+gulp.task('sass', function() {
+  var stream = gulp
+    .src(paths.sass + '/*.scss')
+    .pipe(
+      plumber({
+        errorHandler: function(err) {
+          console.log(err);
+          this.emit('end');
+        }
+      })
+    )
+    .pipe(sourcemaps.init({ loadMaps: true }))
+    .pipe(sass({ errLogToConsole: true }))
+    .pipe(postcss([autoprefixer()]))
+    .pipe(sourcemaps.write(undefined, { sourceRoot: null }))
+    .pipe(gulp.dest(paths.css));
+  return stream;
+});
