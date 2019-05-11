@@ -9,23 +9,25 @@
  * @package YStrap
  */
 
+$container = get_theme_mod( 'ystrap_container_type' );
+_v($container);
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
-
-	<?php wp_head(); ?>
+    <meta charset="<?php bloginfo( 'charset' ); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'ystrap' ); ?></a>
+    <div id="wrapper-navbar" itemscope item-type="http://schema.org/WebSite">
+
+        <a class="skip-link sr-only sr-only-focusable" href="#content"><?php esc_html_e( 'Skip to content', 'ystrap' ); ?></a>
 
 	<header id="masthead" class="site-header">
-    <div class="container">
 		<div class="site-branding">
 			<?php
 			the_custom_logo();
@@ -54,7 +56,8 @@
 			) );
 			?>
 		</nav><!-- #site-navigation -->
-    </div><!-- .container -->
 	</header><!-- #masthead -->
+
+    </div><!-- #wrapper-navbar -->
 
 	<div id="content" class="site-content">

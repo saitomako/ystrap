@@ -46,11 +46,19 @@ gulp.task('sass', function() {
 });
 
 // Run:
-// gulp cssnano
+// gulp watch
+// Starts watcher. Watcher runs gulp sass task on changes
+gulp.task('watch', function() {
+  gulp.watch(`${paths.sass}/**/*.scss`, gulp.series('styles'));
+});
+
+
+// Run:
+// gulp minifycss
 // Minifies CSS files
 gulp.task('minifycss', function() {
   return gulp
-          .src(`${paths.css}/style.css`)
+          .src(`${paths.css}/theme.css`)
           .pipe(sourcemaps.init({ loadMaps: true }))
           .pipe(cleanCSS({ compatibility: '*' }))
           .pipe(
@@ -65,3 +73,14 @@ gulp.task('minifycss', function() {
           .pipe(sourcemaps.write('./'))
           .pipe(gulp.dest(paths.css));
 });
+
+gulp.task('styles', function(callback) {
+  gulp.series('sass', 'minifycss')(callback);
+});
+
+gulp.task('browser-sync', function() {
+  browserSync.init(cfg.browserSyncWatchFiles, cfg.browserSyncOptions);
+});
+
+gulp.task('watch-bs', gulp.parallel('browser-sync', 'watch'));
+

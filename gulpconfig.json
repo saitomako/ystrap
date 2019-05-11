@@ -1,7 +1,7 @@
 {
   "browserSyncOptions": {
-    "proxy": "localhost:8080/",
-    "notify": false
+    "proxy": "test.ms",
+    "notify": true
   },
   "browserSyncWatchFiles": ["./css/*.min.css", "./js/*.min.js", "./**/*.php"],
   "paths": {
