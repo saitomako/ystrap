@@ -120,6 +120,10 @@ add_action( 'widgets_init', 'ystrap_widgets_init' );
  * Enqueue scripts and styles.
  */
 function ystrap_scripts() {
+    $the_theme = wp_get_theme();
+    //_v($the_theme);
+    $theme_version = $the_theme->get( 'Version' );
+    _v($theme_version);
 	wp_enqueue_style( 'ystrap-style', get_stylesheet_uri() );
 
 	wp_enqueue_script( 'ystrap-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );

@@ -44,3 +44,24 @@ gulp.task('sass', function() {
     .pipe(gulp.dest(paths.css));
   return stream;
 });
+
+// Run:
+// gulp cssnano
+// Minifies CSS files
+gulp.task('minifycss', function() {
+  return gulp
+          .src(`${paths.css}/style.css`)
+          .pipe(sourcemaps.init({ loadMaps: true }))
+          .pipe(cleanCSS({ compatibility: '*' }))
+          .pipe(
+            plumber({
+              errorHandler: function(err) {
+                console.log(err);
+                this.emit('end');
+              }
+            })
+          )
+          .pipe(rename({ suffix: '.min' }))
+          .pipe(sourcemaps.write('./'))
+          .pipe(gulp.dest(paths.css));
+});
