@@ -123,8 +123,11 @@ function ystrap_scripts() {
     $the_theme = wp_get_theme();
     //_v($the_theme);
     $theme_version = $the_theme->get( 'Version' );
-    _v($theme_version);
-	wp_enqueue_style( 'ystrap-style', get_stylesheet_uri() );
+    //_v($theme_version);
+
+	//wp_enqueue_style( 'ystrap-style', get_stylesheet_uri() );
+    $css_version = $theme_version . '.' . filemtime( get_template_directory() . '/css/style.min.css' );
+    wp_enqueue_style( 'ystrap-styles', get_template_directory_uri() . '/css/style.min.css', array(), $css_version );
 
 	wp_enqueue_script( 'ystrap-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
